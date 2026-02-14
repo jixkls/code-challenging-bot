@@ -85,11 +85,16 @@ func webhookHandler(wri http.ResponseWriter, req *http.Request){
 
 }
 
+func healthHandler (wri http.ResponseWritter, req *http.Request) {
+	wri.WriteHeader(http.StatusOK)
+	fmt.Fprint(wri, "Code Challenger Bot is running!")
+}
+
 func main() {
 	godotenv.Load()
 
+	http.HandleFunc("/", healthHandler)
 	http.HandleFunc("/webhook", webhookHandler)
-
 
 	fmt.Println("Starting server on :8080")
 	port := os.Getenv("PORT")
