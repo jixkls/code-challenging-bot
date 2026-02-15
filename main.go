@@ -97,7 +97,7 @@ func webhookHandler(res http.ResponseWriter, req *http.Request){
 	chatID := update.Message.Chat.ID
 
 	isCommand := strings.HasPrefix(userText, "/")
-	commands := []string{"/start", "/help"}
+	commands := []string{"/start", "/help", "/challenge", "/easy", "/medium", "/hard"}
 	if isCommand {
 		switch userText {
 			case "/start":
