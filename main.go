@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -54,7 +55,12 @@ func sendReply(ChatID int, Text string) {
 		fmt.Println("Error marshaling reply:", err)
 	}
 
-	res, err := http.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := &http.Client{Transport: tr}
+
+	res, err := client.Post(url, "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		fmt.Println("Error sending reply:", err)
 		return
