@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -94,10 +95,17 @@ func webhookHandler(res http.ResponseWriter, req *http.Request){
 
 	userText := update.Message.Text
 	chatID := update.Message.Chat.ID
-	fmt.Printf("Received message: %s from chat ID: %d\n", userText, chatID)
-	res.WriteHeader(http.StatusOK)
-	sendReply(chatID, "You said: "+userText)
 
+	isCommand := strings.HasPrefix(userText, "/")
+	commands := []string{"/start", "/help"}
+	if isCommand {
+		switch userText {
+		case "/start": sendReply(chatID, "Bot iniciado!")
+		case "/help": sendReply(chatID, "Comandos disponíveis: "+ strings.Join(commands, ", "))
+}} else {
+		sendReply(chatID, "Voce disse: "+userText)
+	}
+	res.WriteHeader(http.StatusOK)
 }
 
 func healthHandler (res http.ResponseWriter, req *http.Request) {
