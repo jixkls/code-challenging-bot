@@ -85,7 +85,7 @@ func webhookHandler(wri http.ResponseWriter, req *http.Request){
 
 }
 
-func healthHandler (wri http.ResponseWritter, req *http.Request) {
+func healthHandler (wri http.ResponseWriter, req *http.Request) {
 	wri.WriteHeader(http.StatusOK)
 	fmt.Fprint(wri, "Code Challenger Bot is running!")
 }
