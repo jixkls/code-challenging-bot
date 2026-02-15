@@ -54,11 +54,12 @@ func sendReply(ChatID int, Text string) {
 		fmt.Println("Error marshaling reply:", err)
 	}
 
-	resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	res, err := http.Post(url, "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		fmt.Println("Error sending reply:", err)
+		return
 	}
-	defer resp.Body.Close()
+	defer res.Body.Close()
 }
 
 func webhookHandler(res http.ResponseWriter, req *http.Request){
