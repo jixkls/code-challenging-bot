@@ -61,7 +61,7 @@ func sendReply(ChatID int, Text string) {
 	defer resp.Body.Close()
 }
 
-func webhookHandler(wri http.ResponseWriter, req *http.Request){
+func webhookHandler(res http.ResponseWriter, req *http.Request){
 	body, err := io.ReadAll(req.Body)
 	if err != nil {
 		fmt.Println("Error reading request body:", err)
@@ -85,9 +85,9 @@ func webhookHandler(wri http.ResponseWriter, req *http.Request){
 
 }
 
-func healthHandler (wri http.ResponseWriter, req *http.Request) {
-	wri.WriteHeader(http.StatusOK)
-	fmt.Fprint(wri, "Code Challenger Bot is running!")
+func healthHandler (res http.ResponseWriter, req *http.Request) {
+	res.WriteHeader(http.StatusOK)
+	fmt.Fprint(res, "Code Challenger Bot is running!")
 }
 
 func main() {
