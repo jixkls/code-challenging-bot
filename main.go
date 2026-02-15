@@ -65,22 +65,30 @@ func webhookHandler(res http.ResponseWriter, req *http.Request){
 	body, err := io.ReadAll(req.Body)
 	if err != nil {
 		fmt.Println("Error reading request body:", err)
+		res.WriteHeader(http.StatusOK)
 		return
 	}
 	defer req.Body.Close()
+	fmt.Println(req.Body)
+
+	if len(body) == 0 {
+		fmt.Println("Empty request body")
+		res.WriteHeader(http.StatusOK)
+		return
+	}
 
 	var update Update
 	err = json.Unmarshal(body, &update)
 	if err != nil {
 		fmt.Println("Error unmarshaling update:", err)
+		res.WriteHeader(http.StatusOK)
 		return
 	}
 
 	userText := update.Message.Text
 	chatID := update.Message.Chat.ID
-
 	fmt.Printf("Received message: %s from chat ID: %d\n", userText, chatID)
-
+	res.WriteHeader(http.StatusOK)
 	sendReply(chatID, "You said: "+userText)
 
 }
