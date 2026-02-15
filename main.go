@@ -100,15 +100,25 @@ func webhookHandler(res http.ResponseWriter, req *http.Request){
 	commands := []string{"/start", "/help"}
 	if isCommand {
 		switch userText {
-		case "/start": sendReply(chatID, "Bot iniciado!")
-		case "/help": sendReply(chatID, "Comandos disponíveis: "+ strings.Join(commands, ", "))
-}} else {
-		sendReply(chatID, "Voce disse: "+userText)
-	}
+			case "/start":
+					sendReply(chatID, "Bot iniciado!")
+			case "/help":
+					sendReply(chatID, "Comandos disponíveis: " + strings.Join(commands, ", "))
+			case "/challenge":
+					sendReply(chatID, "🎯 Random Challenge!\n\n**Easy Problem:**\nWrite a function that returns the sum of two integers.")
+			case "/easy":
+					sendReply(chatID, "🟢 Easy Challenge!\n\n**Problem:** Write a function that checks if a number is even.\n\n```go\nfunc isEven(n int) bool {\n    // Your code here\n}\n```")
+			case "/medium":
+					sendReply(chatID, "🟡 Medium Challenge!\n\n**Problem:** Write a function that reverses a string.\n\n```go\nfunc reverse(s string) string {\n    // Your code here\n}\n```")
+			case "/hard":
+					sendReply(chatID, "🔴 Hard Challenge!\n\n**Problem:** Implement a binary search function.\n\n```go\nfunc binarySearch(arr []int, target int) int {\n    // Your code here\n    // Return index if found, -1 if not found\n}\n```")
+			default:
+    			sendReply(chatID, "Unknown command. Type /help for available commands.")
+}}
 	res.WriteHeader(http.StatusOK)
 }
 
-func healthHandler (res http.ResponseWriter, req *http.Request) {
+func healthHandler(res http.ResponseWriter, req *http.Request) {
 	res.WriteHeader(http.StatusOK)
 	fmt.Fprint(res, "Code Challenger Bot is running!")
 }
