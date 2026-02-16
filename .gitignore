@@ -1,2 +1,5 @@
 //before I forget it
 .env
+
+// Claude will update changelog on README.md for changes I make
+CLAUDE.md

@@ -10,25 +10,14 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/joho/godotenv"
 )
 
-type User struct {
-    // Database fields (GORM)
-    ID               uint      `gorm:"primaryKey" json:"db_id"`
-    TelegramID       int64     `gorm:"uniqueIndex;not null" json:"id"`
+type TelegramUser struct {
+		ID               int64     `json:"id"`
     FirstName        string    `json:"first_name"`
     Username         string    `json:"username"`
-    Level            int       `gorm:"default:1" json:"level"`
-    ChallengesSolved int       `gorm:"default:0" json:"challenges_solved"`
-    CurrentStreak    int       `gorm:"default:0" json:"current_streak"`
-    BestStreak       int       `gorm:"default:0" json:"best_streak"`
-    LastChallenge    time.Time `json:"last_challenge"`
-    CompletedToday   bool      `gorm:"default:false" json:"completed_today"`
-    CreatedAt        time.Time `json:"created_at"`
-    UpdatedAt        time.Time `json:"updated_at"`
 }
 
 type Chat struct {
@@ -38,7 +27,7 @@ type Chat struct {
 
 type Message struct {
     MessageID int    `json:"message_id"`
-    From      User   `json:"from"`
+    From      TelegramUser   `json:"from"`
     Chat      Chat   `json:"chat"`
     Text      string `json:"text"`
 }
@@ -108,21 +97,19 @@ func webhookHandler(res http.ResponseWriter, req *http.Request){
 	userText := update.Message.Text
 	chatID := update.Message.Chat.ID
 
+	// Get or create user in database
+	user, err := GetOrCreateUser(update.Message.From.ID, update.Message.From.Username)
+	if err != nil {
+		log.Printf("Database error: %v", err)
+		sendReply(chatID, "Welcome! (Database temporarily unavailable)")
+		return
+		}
+
 	isCommand := strings.HasPrefix(userText, "/")
 	commands := []string{"/start", "/help", "/challenge", "/easy", "/medium", "/hard"}
 	if isCommand {
 		switch userText {
 			case "/start":
-				telegramUser := update.Message.From
-
-				// Get or create user in database
-				user, err := GetOrCreateUser(telegramUser.TelegramID, telegramUser.Username)
-				if err != nil {
-						log.Printf("Database error: %v", err)
-						sendReply(chatID, "Welcome! (Database temporarily unavailable)")
-						return
-				}
-
     		// Send personalized welcome message
     		message := fmt.Sprintf("Welcome %s! 🎯\n\n📊 Your Progress:\n🔥 Level: %d\n✅ Challenges Solved: %d\n⚡ Current Streak: %d",
         user.Username, user.Level, user.ChallengesSolved, user.CurrentStreak)
