@@ -113,7 +113,21 @@ func webhookHandler(res http.ResponseWriter, req *http.Request){
 	if isCommand {
 		switch userText {
 			case "/start":
-					sendReply(chatID, "Bot iniciado!")
+				telegramUser := update.Message.From
+
+				// Get or create user in database
+				user, err := GetOrCreateUser(telegramUser.TelegramID, telegramUser.Username)
+				if err != nil {
+						log.Printf("Database error: %v", err)
+						sendReply(chatID, "Welcome! (Database temporarily unavailable)")
+						return
+				}
+
+    		// Send personalized welcome message
+    		message := fmt.Sprintf("Welcome %s! 🎯\n\n📊 Your Progress:\n🔥 Level: %d\n✅ Challenges Solved: %d\n⚡ Current Streak: %d",
+        user.Username, user.Level, user.ChallengesSolved, user.CurrentStreak)
+					sendReply(chatID, message)
+
 			case "/help":
 					sendReply(chatID, "Comandos disponíveis: " + strings.Join(commands, ", "))
 			case "/challenge":
