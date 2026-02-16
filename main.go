@@ -140,7 +140,16 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	log.Println("Attempting to connect to database...")
+	defer func() {
+		if recovery := recover(); recovery != nil {
+			log.Println("Recovered from panic:", recovery)
+		}
+	}() //Fechar isso se não fica reiniciando infinitamente
+
 	InitDatabase()
+	log.Println("Database connection established.")
 
 
 	http.HandleFunc("/", healthHandler)
