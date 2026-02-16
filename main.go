@@ -10,13 +10,25 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/joho/godotenv"
 )
 
 type User struct {
-    ID        int    `json:"id"`
-    FirstName string `json:"first_name"`
+    // Database fields (GORM)
+    ID               uint      `gorm:"primaryKey" json:"db_id"`
+    TelegramID       int64     `gorm:"uniqueIndex;not null" json:"id"`
+    FirstName        string    `json:"first_name"`
+    Username         string    `json:"username"`
+    Level            int       `gorm:"default:1" json:"level"`
+    ChallengesSolved int       `gorm:"default:0" json:"challenges_solved"`
+    CurrentStreak    int       `gorm:"default:0" json:"current_streak"`
+    BestStreak       int       `gorm:"default:0" json:"best_streak"`
+    LastChallenge    time.Time `json:"last_challenge"`
+    CompletedToday   bool      `gorm:"default:false" json:"completed_today"`
+    CreatedAt        time.Time `json:"created_at"`
+    UpdatedAt        time.Time `json:"updated_at"`
 }
 
 type Chat struct {
@@ -124,7 +136,12 @@ func healthHandler(res http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	InitDatabase()
+
 
 	http.HandleFunc("/", healthHandler)
 	http.HandleFunc("/webhook", webhookHandler)
