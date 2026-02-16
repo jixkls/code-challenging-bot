@@ -138,7 +138,7 @@ func healthHandler(res http.ResponseWriter, req *http.Request) {
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("Error loading .env file")
 	}
 
 	log.Println("Attempting to connect to database...")
