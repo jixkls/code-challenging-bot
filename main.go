@@ -33,6 +33,10 @@ func main() {
 	services.InitDatabase()
 	log.Println("Database connection established.")
 
+	if os.Getenv("GEMINI_API_KEY") == "" {
+		log.Println("Warning: GEMINI_API_KEY not set. Using static challenges only.")
+	}
+
 	http.HandleFunc("/", healthHandler)
 	http.HandleFunc("/webhook", handlers.WebhookHandler)
 

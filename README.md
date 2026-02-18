@@ -23,7 +23,8 @@ Code Challenger Bot helps developers learn and practice Go through daily coding 
 - `/skip` — Skip the current challenge
 - `/stats` — View detailed progress (level, XP bar, streak)
 - Multiple-choice answers (A/B/C/D) with instant feedback
-- 15 seeded Go challenges across 3 difficulty levels
+- Dynamic LLM-generated challenges via Google Gemini API
+- 15 static Go challenges as fallback across 3 difficulty levels
 - Streak tracking with daily reset
 - Level progression system (level N requires N challenges)
 - Webhook-based architecture for scalability
@@ -53,7 +54,8 @@ code-challenging-bot/
 ├── services/
 │   ├── telegram.go            # SendReply — Telegram API communication
 │   ├── database.go            # InitDatabase, GetOrCreateUser, SaveUser
-│   ├── challenges.go          # Challenge pool (15 seeded), session management
+│   ├── challenges.go          # Challenge pool (15 seeded), session management, LLM fallback
+│   ├── gemini.go              # Gemini API client for dynamic challenge generation
 │   └── progress.go            # Streak calculation, level progression
 ├── go.mod / go.sum
 ├── .env                       # Local environment variables (not committed)
@@ -78,12 +80,21 @@ code-challenging-bot/
 |---------|-------------|--------|
 | **v1** | Daily Go challenges with difficulty levels (easy/medium/hard) | ✅ Done |
 | **v2** | Streak tracking, user progress, level progression (level N requires N challenges) | ✅ Done |
-| **v3** | External LLM API integration for dynamic challenge generation | 📋 Planned |
+| **v3** | Gemini API integration for dynamic challenge generation | ✅ Done |
 | **—** | Micro-SaaS launch with branding and monetization | 📋 Planned |
 
 ---
 
 ## Changelog
+
+### [v0.6.0] - 2026-02-18
+**v3: Dynamic LLM-Generated Challenges**
+- Integrated Google Gemini API (`gemini-2.5-flash`) for dynamic Go challenge generation
+- Structured JSON output via `responseSchema` for reliable challenge formatting
+- Automatic fallback to static challenge pool when API is unavailable or returns errors
+- 10-second request timeout to keep webhook responses fast
+- Validation layer for LLM responses (correct_index range, non-empty fields)
+- New env var: `GEMINI_API_KEY` (optional — bot works without it using static challenges)
 
 ### [v0.5.0] - 2026-02-18
 **v2: Multiple-Choice Challenges & Game Progression**

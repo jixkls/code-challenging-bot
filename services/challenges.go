@@ -1,6 +1,7 @@
 package services
 
 import (
+	"log"
 	"math/rand"
 	"sync"
 	"time"
@@ -239,16 +240,25 @@ case msg := <-ch2:
 	},
 }
 
-// GetRandomChallenge returns a random challenge for the given difficulty.
+// GetRandomChallenge returns a challenge for the given difficulty.
+// Tries LLM-generated challenge first, falls back to static pool on error.
 // Returns nil if the difficulty is not recognized.
 func GetRandomChallenge(difficulty string) *models.Challenge {
+	// Try LLM-generated challenge first
+	challenge, err := GenerateChallenge(difficulty)
+	if err == nil {
+		return challenge
+	}
+	log.Printf("Gemini fallback: %v", err)
+
+	// Fall back to static pool
 	pool, ok := challengePool[difficulty]
 	if !ok || len(pool) == 0 {
 		return nil
 	}
 	idx := rand.Intn(len(pool))
-	challenge := pool[idx]
-	return &challenge
+	staticChallenge := pool[idx]
+	return &staticChallenge
 }
 
 // SetActiveChallenge stores an active challenge session for a user.
