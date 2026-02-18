@@ -77,7 +77,7 @@ code-challenging-bot/
 | Version | Description | Status |
 |---------|-------------|--------|
 | **v1** | Daily Go challenges with difficulty levels (easy/medium/hard) | ✅ Done |
-| **v2** | Streak tracking, user progress, level progression (level N requires N challenges) | 🔧 In Progress |
+| **v2** | Streak tracking, user progress, level progression (level N requires N challenges) | ✅ Done |
 | **v3** | External LLM API integration for dynamic challenge generation | 📋 Planned |
 | **—** | Micro-SaaS launch with branding and monetization | 📋 Planned |
 
