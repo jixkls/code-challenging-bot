@@ -60,7 +60,7 @@
         <span class="line-2"><span class="serif">craft of code.</span></span>
       </h1>
       <p class="hero-sub">
-        A Telegram bot that delivers <strong>daily programming challenges</strong> with game-like progression — streaks, levels, ranks, and real skill growth. Built for developers who take practice seriously.
+        A Telegram bot that delivers <strong>daily programming challenges</strong> with game-like progression — streaks, levels, and real skill growth. Built for developers who take practice seriously.
       </p>
       <div class="hero-actions">
         <a href="https://t.me/CodeChallengerBot" class="btn btn-primary btn-lg">Start Training <i class="ph ph-arrow-right" style="font-size:16px;"></i></a>
@@ -103,9 +103,10 @@
           </div>
           <div class="msg bot">
             <div class="msg-bubble">
-              <i class="ph-fill ph-sword" style="color:var(--cyan);font-size:13px;"></i> <strong>Welcome to Code Challenger Bot!</strong><br><br>
-              Train your coding skills daily with curated challenges.<br><br>
-              Your rank: <span class="msg-rank"><i class="ph-fill ph-circle" style="font-size:8px;color:var(--sap-400);"></i> 8kyu — Beginner</span><br>
+              <i class="ph-fill ph-sword" style="color:var(--cyan);font-size:13px;"></i> <strong>Welcome!</strong><br><br>
+              I'm Code Challenger Bot — solve challenges, build streaks, and level up!<br><br>
+              Level: <strong>1</strong><br>
+              Challenges Solved: <strong>0</strong><br>
               Streak: <i class="ph-fill ph-flame" style="color:var(--amber);font-size:13px;"></i> <strong>0 days</strong>
             </div>
             <div class="msg-time">09:01</div>
@@ -131,8 +132,7 @@
           <div class="msg bot">
             <div class="msg-bubble">
               <i class="ph-fill ph-warning-diamond" style="color:var(--red);font-size:13px;"></i> <strong>Hard Challenge</strong><br><br>
-              Implement a <span class="msg-str">LRU Cache</span> with O(1) <span class="msg-kw">Get</span> and <span class="msg-kw">Put</span> operations.<br><br>
-              +250 XP on completion <i class="ph-fill ph-lightning" style="color:var(--amber);font-size:13px;"></i>
+              Implement a <span class="msg-str">LRU Cache</span> with O(1) <span class="msg-kw">Get</span> and <span class="msg-kw">Put</span> operations.
             </div>
             <div class="msg-time">09:15</div>
           </div>
@@ -169,15 +169,15 @@
       <div class="feature-title">Nine commands. Zero friction.</div>
       <div class="feature-desc">Everything you need to start training, right from your Telegram chat. No accounts, no dashboards — just open and code.</div>
       <div class="cmd-list">
-        <div class="cmd-item"><span class="cmd-name">/start</span><span class="cmd-desc">Initialize your profile, set your rank, receive your welcome challenge</span></div>
+        <div class="cmd-item"><span class="cmd-name">/start</span><span class="cmd-desc">Initialize your profile, set your level, and start training</span></div>
         <div class="cmd-item"><span class="cmd-name">/help</span><span class="cmd-desc">Full command reference and progression system explained</span></div>
         <div class="cmd-item"><span class="cmd-name">/challenge</span><span class="cmd-desc">Get a smart daily challenge at your current level difficulty</span></div>
-        <div class="cmd-item"><span class="cmd-name">/easy</span><span class="cmd-desc">Warm up or build concepts. 8kyu–6kyu range problems</span></div>
+        <div class="cmd-item"><span class="cmd-name">/easy</span><span class="cmd-desc">Warm up or build concepts. Beginner-friendly problems</span></div>
         <div class="cmd-item"><span class="cmd-name">/medium</span><span class="cmd-desc">Push further. Algorithms, data structures, real patterns</span></div>
         <div class="cmd-item"><span class="cmd-name">/hard</span><span class="cmd-desc">Expert-level. DP, graphs, concurrency, system design concepts</span></div>
         <div class="cmd-item"><span class="cmd-name">/hint</span><span class="cmd-desc">Get a hint for your current active challenge</span></div>
         <div class="cmd-item"><span class="cmd-name">/skip</span><span class="cmd-desc">Skip the current challenge and move on to a new one</span></div>
-        <div class="cmd-item"><span class="cmd-name">/stats</span><span class="cmd-desc">View detailed progress — level, XP bar, streak, challenges solved</span></div>
+        <div class="cmd-item"><span class="cmd-name">/stats</span><span class="cmd-desc">View detailed progress — level, streak, challenges solved</span></div>
       </div>
     </div>
 
@@ -238,7 +238,7 @@
       <div class="step-num">01</div>
       <div>
         <div class="step-title">Start the bot</div>
-        <div class="step-desc">Open Telegram, search @CodeChallengerBot and send /start. Your profile is created instantly with a fresh rank and streak.</div>
+        <div class="step-desc">Open Telegram, search @CodeChallengerBot and send /start. Your profile is created instantly with a fresh level and streak.</div>
       </div>
     </div>
     <div class="step reveal delay-1">
@@ -252,14 +252,14 @@
       <div class="step-num">03</div>
       <div>
         <div class="step-title">Solve and submit</div>
-        <div class="step-desc">Code in your editor of choice, then share your solution back. The bot validates and awards XP toward your next level.</div>
+        <div class="step-desc">Code in your editor of choice, then share your solution back. The bot validates and tracks your progress toward the next level.</div>
       </div>
     </div>
     <div class="step reveal delay-3">
       <div class="step-num">04</div>
       <div>
         <div class="step-title">Level up, repeat</div>
-        <div class="step-desc">Streak days stack your multiplier. Completing N challenges unlocks level N. Watch your rank climb from 8kyu to dan.</div>
+        <div class="step-desc">Streak days compound your growth. Completing N challenges unlocks level N. Watch your level climb as you solve more.</div>
       </div>
     </div>
   </div>
@@ -281,8 +281,8 @@
         <span style="font-family:var(--font-m);font-size:12px;color:var(--sap-300);">Go · Data Structures</span>
       </div>
       <div class="cp-meta" style="gap:8px;">
-        <span class="cp-source">XP Reward:</span>
-        <span style="font-family:var(--font-m);font-size:12px;color:var(--amber);display:flex;align-items:center;gap:4px;">+150 <i class="ph-fill ph-lightning" style="font-size:12px;"></i></span>
+        <span class="cp-source">Reward:</span>
+        <span style="font-family:var(--font-m);font-size:12px;color:var(--amber);display:flex;align-items:center;gap:4px;">+1 Level Progress <i class="ph-fill ph-lightning" style="font-size:12px;"></i></span>
         <div class="diff-tag easy" style="font-size:10px;padding:3px 9px;gap:4px;"><i class="ph-bold ph-check" style="font-size:10px;"></i> Completed</div>
       </div>
     </div>
@@ -376,7 +376,7 @@
         </div>
         <div style="margin-left:auto;text-align:right;">
           <div style="font-family:var(--font-m);font-size:10px;color:var(--dimmed);">Best: 34 days</div>
-          <div style="font-family:var(--font-m);font-size:10px;color:var(--amber);margin-top:4px;">+2x XP multiplier</div>
+          <div style="font-family:var(--font-m);font-size:10px;color:var(--amber);margin-top:4px;">Keep it going!</div>
         </div>
       </div>
 
@@ -391,11 +391,11 @@
 
       <div class="prog-stat reveal delay-2">
         <div class="prog-stat-row">
-          <div class="prog-stat-name">Total Honor</div>
-          <div class="prog-stat-val">4,821 XP</div>
+          <div class="prog-stat-name">Total Solved</div>
+          <div class="prog-stat-val">45 challenges</div>
         </div>
         <div class="prog-bar"><div class="prog-fill" style="width:55%;background:linear-gradient(90deg,var(--sap-600),var(--sap-300));"></div></div>
-        <div class="prog-meta"><span>Rank: 5kyu</span><span>Next: 4kyu</span></div>
+        <div class="prog-meta"><span>Level 10</span><span>Best Streak: 34 days</span></div>
       </div>
 
       <div class="prog-stat reveal delay-3">
@@ -492,11 +492,11 @@
         <div class="phase-content-right">
           <div class="phase-status done"><i class="ph-bold ph-check-circle" style="font-size:12px;"></i> Done</div>
           <div class="phase-title">Daily Challenges & Difficulty</div>
-          <div class="phase-desc">Three difficulty tiers with curated Go challenges, proper Telegram code formatting, and user XP tracking across all commands.</div>
+          <div class="phase-desc">Three difficulty tiers with curated Go challenges, proper Telegram code formatting, and user progress tracking across all commands.</div>
           <div class="phase-features">
             <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Easy / Medium / Hard challenges</div>
             <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> /challenge smart difficulty dispatch</div>
-            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> XP reward system per difficulty</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Level progression per difficulty</div>
             <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> User progress persistence</div>
           </div>
         </div>
