@@ -1,9 +1,10 @@
-package main
+package models
 
 import "time"
 
-// Database model for users (move from main.go and add GORM tags)
-type UserStats struct {
+// User represents a bot user with their progress data.
+// GORM auto-migrates this to the "users" table in Supabase.
+type User struct {
 	ID               uint      `gorm:"primaryKey" json:"id"`
 	TelegramID       int64     `gorm:"uniqueIndex;not null" json:"telegram_id"`
 	Username         string    `json:"username"`
@@ -15,14 +16,4 @@ type UserStats struct {
 	CompletedToday   bool      `gorm:"default:false" json:"completed_today"`
 	CreatedAt        time.Time `json:"created_at"`
 	UpdatedAt        time.Time `json:"updated_at"`
-}
-
-// Keep this struct (move from main.go, no changes needed)
-type Challenge struct {
-	ID          string `json:"id"`
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Difficulty  string `json:"difficulty"`
-	Example     string `json:"example"`
-	Hint        string `json:"hint"`
 }

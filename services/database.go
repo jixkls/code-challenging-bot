@@ -1,9 +1,12 @@
-package main
+package services
 
 import (
 	"fmt"
 	"log"
 	"os"
+	"time"
+
+	"telegram-bot/models"
 
 	"github.com/go-playground/validator/v10"
 	"gorm.io/driver/postgres"
@@ -16,6 +19,7 @@ var (
 	validate *validator.Validate
 )
 
+// InitDatabase connects to Supabase (PostgreSQL) and runs auto-migration.
 func InitDatabase() {
 	requiredEnvVars := []string{
 		"SUPABASE_HOST",
@@ -50,8 +54,7 @@ func InitDatabase() {
 
 	log.Println("Database connected successfully!")
 
-	// Auto-migrate tables
-	err = db.AutoMigrate(&User{})
+	err = db.AutoMigrate(&models.User{})
 	if err != nil {
 		log.Fatal("Failed to migrate database:", err)
 	}
@@ -59,15 +62,17 @@ func InitDatabase() {
 	validate = validator.New()
 }
 
-// Return User
-func GetOrCreateUser(telegramID int64, username string) (*User, error) {
-	var user User
+// GetOrCreateUser retrieves an existing user or creates a new one.
+// Also performs a lazy daily reset: if LastChallenge is from a previous day,
+// CompletedToday is reset to false.
+func GetOrCreateUser(telegramID int64, username string) (*models.User, error) {
+	var user models.User
 
 	result := db.Where("telegram_id = ?", telegramID).First(&user)
 
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
-			user = User{
+			user = models.User{
 				TelegramID:       telegramID,
 				Username:         username,
 				Level:            1,
@@ -81,11 +86,29 @@ func GetOrCreateUser(telegramID int64, username string) (*User, error) {
 				return nil, fmt.Errorf("failed to create user: %v", err)
 			}
 
-			log.Printf("Created new user: %d (%s)", telegramID, username)  // FIX: Use telegramID
-		} else {
-			return nil, fmt.Errorf("database error: %v", result.Error)
+			log.Printf("Created new user: %d (%s)", telegramID, username)
+			return &user, nil
+		}
+		return nil, fmt.Errorf("database error: %v", result.Error)
+	}
+
+	// Lazy daily reset: if last challenge was on a different day, reset CompletedToday
+	if !user.LastChallenge.IsZero() {
+		today := time.Now().UTC().Truncate(24 * time.Hour)
+		lastDay := user.LastChallenge.UTC().Truncate(24 * time.Hour)
+		if !today.Equal(lastDay) {
+			user.CompletedToday = false
+			db.Save(&user)
 		}
 	}
 
 	return &user, nil
+}
+
+// SaveUser persists updated user data to the database.
+func SaveUser(user *models.User) error {
+	if err := db.Save(user).Error; err != nil {
+		return fmt.Errorf("failed to save user: %v", err)
+	}
+	return nil
 }

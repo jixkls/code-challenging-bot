@@ -15,11 +15,17 @@ Code Challenger Bot helps developers learn and practice Go through daily coding 
 
 - `/start` — Welcome message with personalized progress stats
 - `/help` — List of available commands
-- `/challenge` — Get a random challenge
+- `/challenge` — Get a random difficulty challenge
 - `/easy` — Get an easy Go challenge
 - `/medium` — Get a medium Go challenge
 - `/hard` — Get a hard Go challenge
-- User progress tracking (level, challenges solved, streak)
+- `/hint` — Get a hint for your current challenge
+- `/skip` — Skip the current challenge
+- `/stats` — View detailed progress (level, XP bar, streak)
+- Multiple-choice answers (A/B/C/D) with instant feedback
+- 15 seeded Go challenges across 3 difficulty levels
+- Streak tracking with daily reset
+- Level progression system (level N requires N challenges)
 - Webhook-based architecture for scalability
 
 ---
@@ -37,13 +43,22 @@ Code Challenger Bot helps developers learn and practice Go through daily coding 
 ## Project Structure
 
 ```
-telegram-bot/
-├── main.go          # Webhook handler, command parsing, bot logic
-├── go.mod
-├── go.sum
-├── .env             # Local environment variables (not committed)
-├── Dockerfile       # Fly.io deployment config
-└── fly.toml         # Fly.io app configuration
+code-challenging-bot/
+├── main.go                    # Entry point: load env, init DB, register routes, start server
+├── handlers/
+│   └── webhook.go             # HTTP webhook handler, command routing, answer detection
+├── models/
+│   ├── user.go                # User GORM model (persistent stats)
+│   └── challenge.go           # Challenge struct + ActiveChallenge (in-memory sessions)
+├── services/
+│   ├── telegram.go            # SendReply — Telegram API communication
+│   ├── database.go            # InitDatabase, GetOrCreateUser, SaveUser
+│   ├── challenges.go          # Challenge pool (15 seeded), session management
+│   └── progress.go            # Streak calculation, level progression
+├── go.mod / go.sum
+├── .env                       # Local environment variables (not committed)
+├── Dockerfile                 # Multi-stage Docker build for Fly.io
+└── fly.toml                   # Fly.io app configuration
 ```
 
 ---
@@ -69,6 +84,17 @@ telegram-bot/
 ---
 
 ## Changelog
+
+### [v0.5.0] - 2026-02-18
+**v2: Multiple-Choice Challenges & Game Progression**
+- Reorganized project into packages (handlers/, models/, services/)
+- Multiple-choice challenge system with 15 seeded Go challenges (5 easy, 5 medium, 5 hard)
+- Answer verification with A/B/C/D input detection
+- Streak tracking with lazy daily reset
+- Level progression system (level N requires N*(N+1)/2 total challenges)
+- New commands: `/hint`, `/skip`, `/stats` with XP progress bar
+- Fixed critical compilation bug (UserStats → User rename)
+- Slimmed main.go to entry-point only (~45 lines)
 
 ### [v0.4.0] - 2026-02-16
 **Database & User Tracking**
