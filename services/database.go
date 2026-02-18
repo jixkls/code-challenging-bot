@@ -54,9 +54,15 @@ func InitDatabase() {
 
 	log.Println("Database connected successfully!")
 
-	err = db.AutoMigrate(&models.User{})
-	if err != nil {
-		log.Fatal("Failed to migrate database:", err)
+	if os.Getenv("RUN_MIGRATIONS") == "true" {
+		log.Println("Running database migrations...")
+		err = db.AutoMigrate(&models.User{})
+		if err != nil {
+			log.Fatal("Failed to migrate database:", err)
+		}
+		log.Println("Migrations complete.")
+	} else {
+		log.Println("Skipping migrations. Set RUN_MIGRATIONS=true to run.")
 	}
 
 	validate = validator.New()
