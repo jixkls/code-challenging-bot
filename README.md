@@ -87,6 +87,12 @@ code-challenging-bot/
 
 ## Changelog
 
+### [v0.6.1] - 2026-02-18
+**Startup Optimization: Skip AutoMigrate on Normal Boots**
+- Guarded GORM `AutoMigrate` behind `RUN_MIGRATIONS=true` env var
+- Normal boots skip ~5 `pg_catalog` schema queries, reducing startup latency
+- Migrations run only when explicitly needed (e.g., after adding a new column)
+
 ### [v0.6.0] - 2026-02-18
 **v3: Dynamic LLM-Generated Challenges**
 - Integrated Google Gemini API (`gemini-2.5-flash`) for dynamic Go challenge generation
