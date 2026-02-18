@@ -57,6 +57,10 @@ code-challenging-bot/
 │   ├── challenges.go          # Challenge pool (15 seeded), session management, LLM fallback
 │   ├── gemini.go              # Gemini API client for dynamic challenge generation
 │   └── progress.go            # Streak calculation, level progression
+├── static/
+│   ├── index.html             # Landing page HTML
+│   ├── styles.css             # Landing page styles
+│   └── script.js              # Landing page scripts (cursor, reveals, mobile menu)
 ├── go.mod / go.sum
 ├── .env                       # Local environment variables (not committed)
 ├── Dockerfile                 # Multi-stage Docker build for Fly.io
@@ -86,6 +90,15 @@ code-challenging-bot/
 ---
 
 ## Changelog
+
+### [v0.7.0] - 2026-02-18
+**Landing Page Refactor**
+- Split monolithic 1,700-line HTML file (`view/`) into proper `static/` directory with separate HTML, CSS, and JS files
+- Serve landing page from Go app via `http.FileServer` at `/`
+- Moved health check endpoint from `/` to `/health`
+- Updated Dockerfile to copy `static/` into container with proper `WORKDIR`
+- Added explicit Fly.io health check on `/health` in `fly.toml`
+- Updated landing page content: version v0.6.1, copyright 2026, roadmap statuses (v1–v3 done), Gemini API in tech stack, all 9 commands listed, non-Go language badges changed to "Coming Soon"
 
 ### [v0.6.1] - 2026-02-18
 **Startup Optimization: Skip AutoMigrate on Normal Boots**

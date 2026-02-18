@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Challenger Bot — Train. Rank. Master.</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- BG ELEMENTS -->
+<div class="hero-grid"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-mark"><i class="ph-bold ph-sword"></i></div>
+      <div>
+        <div class="logo-text">Code<span>Challenger</span></div>
+        <div class="logo-sub">@CodeChallengerBot</div>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features" onclick="closeMenu()">Features</a></li>
+      <li><a href="#levels" onclick="closeMenu()">Progression</a></li>
+      <li><a href="#roadmap" onclick="closeMenu()">Roadmap</a></li>
+      <li><a href="#stack" onclick="closeMenu()">Tech Stack</a></li>
+      <li><a href="#opensource" onclick="closeMenu()">Open Source</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://github.com/jixkls/code-challenging-bot" class="btn btn-ghost btn-sm">GitHub</a>
+      <a href="https://t.me/CodeChallengerBot" class="btn btn-primary btn-sm">Open in Telegram <i class="ph ph-arrow-up-right" style="font-size:14px;"></i></a>
+      <button class="nav-hamburger" id="navHamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<div class="container">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Live on Telegram · v0.6.1
+      </div>
+      <h1>
+        <span class="line-1">Train. Rank.</span>
+        <span class="line-2"><span class="accent">Master</span> the</span>
+        <span class="line-2"><span class="serif">craft of code.</span></span>
+      </h1>
+      <p class="hero-sub">
+        A Telegram bot that delivers <strong>daily programming challenges</strong> with game-like progression — streaks, levels, ranks, and real skill growth. Built for developers who take practice seriously.
+      </p>
+      <div class="hero-actions">
+        <a href="https://t.me/CodeChallengerBot" class="btn btn-primary btn-lg">Start Training <i class="ph ph-arrow-right" style="font-size:16px;"></i></a>
+        <a href="#features" class="btn btn-ghost btn-lg">Explore Features</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">55<span>+</span></div>
+          <div class="hero-stat-label">Languages</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Difficulty Levels</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">∞</div>
+          <div class="hero-stat-label">Challenges</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELEGRAM MOCKUP -->
+    <div class="hero-right">
+      <div class="tg-phone">
+        <div class="tg-scan"></div>
+        <div class="tg-header">
+          <div class="tg-avatar"><i class="ph-bold ph-sword" style="font-size:18px;"></i></div>
+          <div>
+            <div class="tg-name">Code Challenger Bot</div>
+            <div class="tg-status">online</div>
+          </div>
+          <div style="margin-left:auto;font-family:var(--font-m);font-size:10px;color:var(--dimmed);display:flex;align-items:center;gap:4px;"><i class="ph ph-broadcast" style="font-size:14px;color:var(--dimmed);"></i> Fly.io</div>
+        </div>
+        <div class="tg-body">
+          <div class="msg-divider">Today</div>
+
+          <div class="msg user">
+            <div class="msg-bubble"><span class="msg-cmd">/start</span></div>
+            <div class="msg-time">09:01</div>
+          </div>
+          <div class="msg bot">
+            <div class="msg-bubble">
+              <i class="ph-fill ph-sword" style="color:var(--cyan);font-size:13px;"></i> <strong>Welcome to Code Challenger Bot!</strong><br><br>
+              Train your coding skills daily with curated challenges.<br><br>
+              Your rank: <span class="msg-rank"><i class="ph-fill ph-circle" style="font-size:8px;color:var(--sap-400);"></i> 8kyu — Beginner</span><br>
+              Streak: <i class="ph-fill ph-flame" style="color:var(--amber);font-size:13px;"></i> <strong>0 days</strong>
+            </div>
+            <div class="msg-time">09:01</div>
+          </div>
+
+          <div class="msg user">
+            <div class="msg-bubble"><span class="msg-cmd">/challenge</span></div>
+            <div class="msg-time">09:02</div>
+          </div>
+          <div class="msg bot">
+            <div class="msg-bubble">
+              <i class="ph-fill ph-crosshair" style="color:var(--cyan);font-size:13px;"></i> <strong>Daily Challenge</strong> · <span class="msg-diff-med">Medium</span><br><br>
+              <span class="msg-kw">func</span> <span class="msg-str">isPalindrome</span>(s <span class="msg-kw">string</span>) <span class="msg-kw">bool</span><br><br>
+              Return <span class="msg-str">true</span> if the string reads the same forwards and backwards, ignoring spaces and case.
+            </div>
+            <div class="msg-time">09:02</div>
+          </div>
+
+          <div class="msg user">
+            <div class="msg-bubble"><span class="msg-cmd">/hard</span></div>
+            <div class="msg-time">09:15</div>
+          </div>
+          <div class="msg bot">
+            <div class="msg-bubble">
+              <i class="ph-fill ph-warning-diamond" style="color:var(--red);font-size:13px;"></i> <strong>Hard Challenge</strong><br><br>
+              Implement a <span class="msg-str">LRU Cache</span> with O(1) <span class="msg-kw">Get</span> and <span class="msg-kw">Put</span> operations.<br><br>
+              +250 XP on completion <i class="ph-fill ph-lightning" style="color:var(--amber);font-size:13px;"></i>
+            </div>
+            <div class="msg-time">09:15</div>
+          </div>
+        </div>
+        <div class="tg-input-bar">
+          <div class="tg-input">/easy<div class="tg-input-cursor"></div></div>
+          <div class="tg-send"><i class="ph-bold ph-arrow-up" style="font-size:14px;"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item hi"><i class="ph ph-lightning" style="font-size:12px;"></i> Go</span><span class="ticker-item">Python</span><span class="ticker-item hi2">TypeScript</span><span class="ticker-item">Rust</span><span class="ticker-item hi">JavaScript</span><span class="ticker-item">C++</span><span class="ticker-item hi2">Kotlin</span><span class="ticker-item">Java</span><span class="ticker-item hi">Haskell</span><span class="ticker-item">Ruby</span><span class="ticker-item hi2">Swift</span><span class="ticker-item">SQL</span><span class="ticker-item hi">Scala</span><span class="ticker-item">Elixir</span><span class="ticker-item hi2">Dart</span><span class="ticker-item">PHP</span>
+    <span class="ticker-item hi"><i class="ph ph-lightning" style="font-size:12px;"></i> Go</span><span class="ticker-item">Python</span><span class="ticker-item hi2">TypeScript</span><span class="ticker-item">Rust</span><span class="ticker-item hi">JavaScript</span><span class="ticker-item">C++</span><span class="ticker-item hi2">Kotlin</span><span class="ticker-item">Java</span><span class="ticker-item hi">Haskell</span><span class="ticker-item">Ruby</span><span class="ticker-item hi2">Swift</span><span class="ticker-item">SQL</span><span class="ticker-item hi">Scala</span><span class="ticker-item">Elixir</span><span class="ticker-item hi2">Dart</span><span class="ticker-item">PHP</span>
+  </div>
+</div>
+
+<!-- ════════════════ FEATURES ════════════════ -->
+<div class="div-line" style="margin-top:0;"></div>
+<div id="features" class="section container">
+  <div class="section-head">
+    <div class="label reveal">01 — Core Features</div>
+    <h2 class="reveal delay-1">Built for developers<br>who <em>mean it</em></h2>
+  </div>
+
+  <div class="features-grid">
+    <!-- Bot Commands -->
+    <div class="feature-card span-2 reveal">
+      <div class="feature-icon"><i class="ph ph-keyboard"></i></div>
+      <div class="feature-title">Nine commands. Zero friction.</div>
+      <div class="feature-desc">Everything you need to start training, right from your Telegram chat. No accounts, no dashboards — just open and code.</div>
+      <div class="cmd-list">
+        <div class="cmd-item"><span class="cmd-name">/start</span><span class="cmd-desc">Initialize your profile, set your rank, receive your welcome challenge</span></div>
+        <div class="cmd-item"><span class="cmd-name">/help</span><span class="cmd-desc">Full command reference and progression system explained</span></div>
+        <div class="cmd-item"><span class="cmd-name">/challenge</span><span class="cmd-desc">Get a smart daily challenge at your current level difficulty</span></div>
+        <div class="cmd-item"><span class="cmd-name">/easy</span><span class="cmd-desc">Warm up or build concepts. 8kyu–6kyu range problems</span></div>
+        <div class="cmd-item"><span class="cmd-name">/medium</span><span class="cmd-desc">Push further. Algorithms, data structures, real patterns</span></div>
+        <div class="cmd-item"><span class="cmd-name">/hard</span><span class="cmd-desc">Expert-level. DP, graphs, concurrency, system design concepts</span></div>
+        <div class="cmd-item"><span class="cmd-name">/hint</span><span class="cmd-desc">Get a hint for your current active challenge</span></div>
+        <div class="cmd-item"><span class="cmd-name">/skip</span><span class="cmd-desc">Skip the current challenge and move on to a new one</span></div>
+        <div class="cmd-item"><span class="cmd-name">/stats</span><span class="cmd-desc">View detailed progress — level, XP bar, streak, challenges solved</span></div>
+      </div>
+    </div>
+
+    <!-- Difficulty Levels -->
+    <div class="feature-card reveal delay-2">
+      <div class="feature-icon"><i class="ph ph-crosshair"></i></div>
+      <div class="feature-title">Three tiers. Real growth.</div>
+      <div class="feature-desc">Challenges scale to your level. Easy builds habits. Medium builds skills. Hard builds mastery.</div>
+      <div class="diff-list">
+        <div class="diff-tag easy"><i class="ph-fill ph-circle" style="font-size:8px;"></i> Easy</div>
+        <div class="diff-tag med"><i class="ph-fill ph-circle" style="font-size:8px;"></i> Medium</div>
+        <div class="diff-tag hard"><i class="ph-fill ph-circle" style="font-size:8px;"></i> Hard</div>
+      </div>
+    </div>
+
+    <!-- Telegram native -->
+    <div class="feature-card reveal delay-1">
+      <div class="feature-icon"><i class="ph ph-device-mobile"></i></div>
+      <div class="feature-title">Telegram native</div>
+      <div class="feature-desc">Train from anywhere. Telegram formatting gives you <code style="font-family:var(--font-m);color:var(--cyan);font-size:12px;">code blocks</code>, <strong>bold</strong> descriptions, and instant challenge delivery — no app switching.</div>
+    </div>
+
+    <!-- Persistent progress -->
+    <div class="feature-card reveal delay-2">
+      <div class="feature-icon"><i class="ph ph-database"></i></div>
+      <div class="feature-title">Persistent progress</div>
+      <div class="feature-desc">Every challenge, every streak day, every level-up lives in PostgreSQL via Supabase. Your progress is yours — always.</div>
+    </div>
+
+    <!-- Go focused -->
+    <div class="feature-card reveal delay-3">
+      <div class="feature-icon"><i class="ph ph-code"></i></div>
+      <div class="feature-title">Go-first, language agnostic</div>
+      <div class="feature-desc">Born as a Go learning project, evolving to support 55+ languages. Challenge any language, track all of them.</div>
+    </div>
+
+    <!-- AI powered -->
+    <div class="feature-card reveal">
+      <div class="feature-icon"><i class="ph ph-brain"></i></div>
+      <div class="feature-title">AI-generated challenges</div>
+      <div class="feature-desc">Powered by Google Gemini — dynamic, infinite challenge generation replaces static problems with contextual, unique questions every time.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ HOW IT WORKS ════════════════ -->
+<div class="section container">
+  <div class="section-head">
+    <div class="label reveal">02 — How it Works</div>
+    <h2 class="reveal delay-1">From zero to<br><em>mastery</em> in four steps</h2>
+  </div>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div>
+        <div class="step-title">Start the bot</div>
+        <div class="step-desc">Open Telegram, search @CodeChallengerBot and send /start. Your profile is created instantly with a fresh rank and streak.</div>
+      </div>
+    </div>
+    <div class="step reveal delay-1">
+      <div class="step-num active">02</div>
+      <div>
+        <div class="step-title">Pick your challenge</div>
+        <div class="step-desc">Use /challenge for a curated daily problem, or /easy /medium /hard for targeted practice at any time.</div>
+      </div>
+    </div>
+    <div class="step reveal delay-2">
+      <div class="step-num">03</div>
+      <div>
+        <div class="step-title">Solve and submit</div>
+        <div class="step-desc">Code in your editor of choice, then share your solution back. The bot validates and awards XP toward your next level.</div>
+      </div>
+    </div>
+    <div class="step reveal delay-3">
+      <div class="step-num">04</div>
+      <div>
+        <div class="step-title">Level up, repeat</div>
+        <div class="step-desc">Streak days stack your multiplier. Completing N challenges unlocks level N. Watch your rank climb from 8kyu to dan.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ CHALLENGE PREVIEW ════════════════ -->
+<div class="section container">
+  <div class="section-head">
+    <div class="label reveal">03 — Challenge Format</div>
+    <h2 class="reveal delay-1">What a <em>real challenge</em> looks like</h2>
+  </div>
+
+  <div class="challenge-preview reveal">
+    <div class="cp-header">
+      <div class="cp-meta">
+        <span class="diff-tag med" style="font-size:11px;padding:4px 12px;"><i class="ph-fill ph-circle" style="font-size:6px;"></i> Medium</span>
+        <span style="font-family:var(--font-m);font-size:12px;color:var(--sap-300);">Go · Data Structures</span>
+      </div>
+      <div class="cp-meta" style="gap:8px;">
+        <span class="cp-source">XP Reward:</span>
+        <span style="font-family:var(--font-m);font-size:12px;color:var(--amber);display:flex;align-items:center;gap:4px;">+150 <i class="ph-fill ph-lightning" style="font-size:12px;"></i></span>
+        <div class="diff-tag easy" style="font-size:10px;padding:3px 9px;gap:4px;"><i class="ph-bold ph-check" style="font-size:10px;"></i> Completed</div>
+      </div>
+    </div>
+    <div class="cp-body">
+      <div class="cp-problem">
+        <div class="cp-prob-title">Two Sum — Return Indices</div>
+        <div class="cp-prob-desc">
+          Given an array of integers <code style="font-family:var(--font-m);color:var(--sap-300);">nums</code> and a target integer <code style="font-family:var(--font-m);color:var(--sap-300);">target</code>, return the indices of the two numbers that add up to target. You may assume each input has exactly one solution and you may not use the same element twice.
+        </div>
+        <div class="cp-example">
+          <div class="cp-ex-label">Example</div>
+          <div class="cp-ex-in">Input: nums = [2, 7, 11, 15], target = 9</div>
+          <div class="cp-ex-out">Output: [0, 1] // nums[0] + nums[1] = 9</div>
+        </div>
+        <div style="margin-top:16px;font-family:var(--font-m);font-size:11px;color:var(--dimmed);">
+          Constraint: O(n) time complexity expected
+        </div>
+      </div>
+      <div class="cp-code-area">
+        <div class="cp-code-head">
+          <span>Solution · Go</span>
+          <span style="color:var(--green);display:flex;align-items:center;gap:4px;"><i class="ph-fill ph-circle" style="font-size:6px;"></i> Tests passing</span>
+        </div>
+        <div class="cp-code">
+<span class="kw">func</span> <span class="fn">twoSum</span><span class="op">(</span><span class="fn">nums </span><span class="op">[]</span><span class="kw">int</span><span class="op">, </span><span class="fn">target </span><span class="kw">int</span><span class="op">) []</span><span class="kw">int</span><span class="op"> {</span>
+  <span class="fn">seen</span><span class="op"> := </span><span class="kw">make</span><span class="op">(</span><span class="kw">map</span><span class="op">[</span><span class="kw">int</span><span class="op">]</span><span class="kw">int</span><span class="op">)</span>
+  <span class="kw">for</span><span class="op"> </span><span class="fn">i</span><span class="op">, </span><span class="fn">v</span><span class="op"> := </span><span class="kw">range</span><span class="op"> </span><span class="fn">nums</span><span class="op"> {</span>
+    <span class="kw">if</span><span class="op"> </span><span class="fn">j</span><span class="op">, </span><span class="fn">ok</span><span class="op"> := </span><span class="fn">seen</span><span class="op">[</span><span class="fn">target</span><span class="op">-</span><span class="fn">v</span><span class="op">]; </span><span class="fn">ok</span><span class="op"> {</span>
+      <span class="kw">return</span><span class="op"> []</span><span class="kw">int</span><span class="op">{</span><span class="fn">j</span><span class="op">, </span><span class="fn">i</span><span class="op">}</span>
+    <span class="op">}</span>
+    <span class="fn">seen</span><span class="op">[</span><span class="fn">v</span><span class="op">] = </span><span class="fn">i</span>
+  <span class="op">}</span>
+  <span class="kw">return</span><span class="op"> </span><span class="kw">nil</span>
+<span class="op">}</span><span class="cp-cursor"></span>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+          <div class="diff-tag easy" style="font-size:10px;padding:4px 10px;"><i class="ph-bold ph-check" style="font-size:10px;"></i> O(n) time</div>
+          <div class="diff-tag easy" style="font-size:10px;padding:4px 10px;"><i class="ph-bold ph-check" style="font-size:10px;"></i> O(n) space</div>
+          <div class="diff-tag easy" style="font-size:10px;padding:4px 10px;"><i class="ph-bold ph-check" style="font-size:10px;"></i> Hash map</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ LEVELS ════════════════ -->
+<div id="levels" class="section container">
+  <div class="section-head">
+    <div class="label reveal">04 — Progression System</div>
+    <h2 class="reveal delay-1">Level N needs<br><em>N challenges</em> — simple.</h2>
+    <p class="reveal delay-2" style="color:var(--muted);font-size:16px;margin-top:16px;max-width:500px;line-height:1.7;">A mathematical progression system where each level demands proportionally more from you. The higher you go, the more intentional your practice must be.</p>
+  </div>
+
+  <div class="progression-wrap">
+    <div>
+      <div class="level-grid">
+        <!-- Row 1 -->
+        <div class="level-card unlocked"><div class="level-num">1</div><div class="level-req">1 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card unlocked"><div class="level-num">2</div><div class="level-req">2 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card unlocked"><div class="level-num">3</div><div class="level-req">3 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card unlocked"><div class="level-num">4</div><div class="level-req">4 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card unlocked"><div class="level-num">5</div><div class="level-req">5 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <!-- Row 2 -->
+        <div class="level-card unlocked"><div class="level-num">6</div><div class="level-req">6 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card unlocked"><div class="level-num">7</div><div class="level-req">7 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card unlocked"><div class="level-num">8</div><div class="level-req">8 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card unlocked"><div class="level-num">9</div><div class="level-req">9 kata</div><div class="level-status"><i class="ph-bold ph-check" style="color:var(--green);"></i></div></div>
+        <div class="level-card current"><div class="level-num">10</div><div class="level-req">10 kata</div><div class="level-status"><i class="ph-fill ph-lightning" style="color:var(--cyan);"></i></div></div>
+        <!-- Row 3 -->
+        <div class="level-card locked"><div class="level-num">11</div><div class="level-req">11 kata</div><div class="level-status"><i class="ph-fill ph-lock-simple" style="color:var(--dimmed);"></i></div></div>
+        <div class="level-card locked"><div class="level-num">12</div><div class="level-req">12 kata</div><div class="level-status"><i class="ph-fill ph-lock-simple" style="color:var(--dimmed);"></i></div></div>
+        <div class="level-card locked"><div class="level-num">13</div><div class="level-req">13 kata</div><div class="level-status"><i class="ph-fill ph-lock-simple" style="color:var(--dimmed);"></i></div></div>
+        <div class="level-card locked"><div class="level-num">14</div><div class="level-req">14 kata</div><div class="level-status"><i class="ph-fill ph-lock-simple" style="color:var(--dimmed);"></i></div></div>
+        <div class="level-card locked"><div class="level-num" style="font-size:14px;">∞</div><div class="level-req">dan</div><div class="level-status"><i class="ph-fill ph-lock-simple" style="color:var(--dimmed);"></i></div></div>
+      </div>
+      <div style="margin-top:20px;font-family:var(--font-m);font-size:11px;color:var(--dimmed);text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;">
+        <span style="display:flex;align-items:center;gap:4px;"><i class="ph-bold ph-check" style="color:var(--green);font-size:12px;"></i> Unlocked</span>
+        <span style="display:flex;align-items:center;gap:4px;"><i class="ph-fill ph-lightning" style="color:var(--cyan);font-size:12px;"></i> In Progress</span>
+        <span style="display:flex;align-items:center;gap:4px;"><i class="ph-fill ph-lock-simple" style="color:var(--dimmed);font-size:12px;"></i> Locked</span>
+      </div>
+    </div>
+
+    <div class="progression-info">
+      <div class="streak-card reveal">
+        <div class="streak-flame"><i class="ph-fill ph-flame"></i></div>
+        <div>
+          <div class="streak-num">12</div>
+          <div class="streak-label">Day Streak</div>
+        </div>
+        <div style="margin-left:auto;text-align:right;">
+          <div style="font-family:var(--font-m);font-size:10px;color:var(--dimmed);">Best: 34 days</div>
+          <div style="font-family:var(--font-m);font-size:10px;color:var(--amber);margin-top:4px;">+2x XP multiplier</div>
+        </div>
+      </div>
+
+      <div class="prog-stat reveal delay-1">
+        <div class="prog-stat-row">
+          <div class="prog-stat-name">Level Progress</div>
+          <div class="prog-stat-val">7 / 10 kata</div>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:70%;"></div></div>
+        <div class="prog-meta"><span>Level 10</span><span>Level 11 →</span></div>
+      </div>
+
+      <div class="prog-stat reveal delay-2">
+        <div class="prog-stat-row">
+          <div class="prog-stat-name">Total Honor</div>
+          <div class="prog-stat-val">4,821 XP</div>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:55%;background:linear-gradient(90deg,var(--sap-600),var(--sap-300));"></div></div>
+        <div class="prog-meta"><span>Rank: 5kyu</span><span>Next: 4kyu</span></div>
+      </div>
+
+      <div class="prog-stat reveal delay-3">
+        <div class="prog-stat-row">
+          <div class="prog-stat-name">Challenges by Difficulty</div>
+          <div class="prog-stat-val">45 total</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <div style="flex:1;">
+            <div style="font-family:var(--font-m);font-size:10px;color:var(--green);margin-bottom:4px;">Easy · 22</div>
+            <div class="prog-bar"><div class="prog-fill" style="width:85%;background:linear-gradient(90deg,var(--green),#34d399);"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-m);font-size:10px;color:var(--amber);margin-bottom:4px;">Med · 18</div>
+            <div class="prog-bar"><div class="prog-fill" style="width:65%;background:linear-gradient(90deg,var(--amber),#fbbf24);"></div></div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-m);font-size:10px;color:var(--red);margin-bottom:4px;">Hard · 5</div>
+            <div class="prog-bar"><div class="prog-fill" style="width:30%;background:linear-gradient(90deg,var(--red),#f97316);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ LANGUAGES ════════════════ -->
+<div class="section container">
+  <div class="section-head">
+    <div class="label reveal">05 — Languages</div>
+    <h2 class="reveal delay-1">Started with <em>Go.</em><br>Growing to 55+.</h2>
+  </div>
+
+  <div class="langs-grid">
+    <div class="lang-card featured reveal"><div class="lang-icon"><i class="ph-bold ph-code" style="color:var(--cyan);"></i></div><div class="lang-name">Go</div><div class="lang-badge">Core</div></div>
+    <div class="lang-card reveal delay-1"><div class="lang-icon"><i class="ph-bold ph-file-py" style="color:#3776AB;"></i></div><div class="lang-name">Python</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal delay-2"><div class="lang-icon"><i class="ph-bold ph-file-ts" style="color:#3178C6;"></i></div><div class="lang-name">TypeScript</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal delay-1"><div class="lang-icon"><i class="ph-bold ph-gear-six" style="color:#DEA584;"></i></div><div class="lang-name">Rust</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal delay-2"><div class="lang-icon"><i class="ph-bold ph-coffee" style="color:#ED8B00;"></i></div><div class="lang-name">Java</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal"><div class="lang-icon"><i class="ph-bold ph-diamond" style="color:#CC342D;"></i></div><div class="lang-name">Ruby</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal delay-1"><div class="lang-icon"><i class="ph-bold ph-apple-logo" style="color:#F05138;"></i></div><div class="lang-name">Swift</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal delay-2"><div class="lang-icon"><i class="ph-bold ph-brackets-curly" style="color:#7F52FF;"></i></div><div class="lang-name">Kotlin</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal"><div class="lang-icon"><i class="ph-bold ph-function" style="color:#5D4F85;"></i></div><div class="lang-name">Haskell</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal delay-1"><div class="lang-icon"><i class="ph-bold ph-table" style="color:#00758F;"></i></div><div class="lang-name">SQL</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal delay-2"><div class="lang-icon"><i class="ph-bold ph-drop" style="color:#6E4A7E;"></i></div><div class="lang-name">Elixir</div><div class="lang-badge soon">Coming Soon</div></div>
+    <div class="lang-card reveal" style="background:rgba(3,6,26,0.4);justify-content:center;text-align:center;gap:6px;">
+      <div style="font-size:22px;font-weight:600;">+44</div>
+      <div class="lang-badge soon" style="font-size:10px;">more via LLM</div>
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ ROADMAP ════════════════ -->
+<div id="roadmap" class="section container">
+  <div class="section-head">
+    <div class="label reveal">06 — Roadmap</div>
+    <h2 class="reveal delay-1">From MVP to<br><em>micro-SaaS.</em></h2>
+  </div>
+
+  <div class="roadmap reveal">
+    <div class="roadmap-line"></div>
+    <div class="roadmap-phases">
+
+      <div class="phase">
+        <div class="phase-content-left">
+          <div class="phase-status done"><i class="ph-bold ph-check-circle" style="font-size:12px;"></i> Deployed</div>
+          <div class="phase-title">Foundation & Core Bot</div>
+          <div class="phase-desc">Webhook infrastructure, Supabase/GORM database integration, user tracking, basic command routing and Telegram formatting.</div>
+          <div class="phase-features">
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Fly.io deployment with health checks</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> PostgreSQL schema & GORM ORM</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> All 5 commands implemented</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Telegram webhook integration</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> TelegramUser / User separation</div>
+          </div>
+        </div>
+        <div class="phase-center">
+          <div class="phase-dot done">v0</div>
+          <div class="phase-ver">2026</div>
+        </div>
+        <div class="phase-content-right"></div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-content-left"></div>
+        <div class="phase-center">
+          <div class="phase-dot done">v1</div>
+          <div class="phase-ver">Done</div>
+        </div>
+        <div class="phase-content-right">
+          <div class="phase-status done"><i class="ph-bold ph-check-circle" style="font-size:12px;"></i> Done</div>
+          <div class="phase-title">Daily Challenges & Difficulty</div>
+          <div class="phase-desc">Three difficulty tiers with curated Go challenges, proper Telegram code formatting, and user XP tracking across all commands.</div>
+          <div class="phase-features">
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Easy / Medium / Hard challenges</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> /challenge smart difficulty dispatch</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> XP reward system per difficulty</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> User progress persistence</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-content-left">
+          <div class="phase-status done"><i class="ph-bold ph-check-circle" style="font-size:12px;"></i> Deployed</div>
+          <div class="phase-title">Streaks & Level Progression</div>
+          <div class="phase-desc">The game layer. Streak tracking with daily resets, multiple-choice challenges, /hint, /skip, /stats commands, and the level N = N challenges system.</div>
+          <div class="phase-features">
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Streak counter & daily resets</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Multiple-choice A/B/C/D answers</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Level N requires N completions</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> /hint, /skip, /stats commands</div>
+          </div>
+        </div>
+        <div class="phase-center">
+          <div class="phase-dot done">v2</div>
+          <div class="phase-ver">Done</div>
+        </div>
+        <div class="phase-content-right"></div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-content-left"></div>
+        <div class="phase-center">
+          <div class="phase-dot done">v3</div>
+          <div class="phase-ver">Done</div>
+        </div>
+        <div class="phase-content-right">
+          <div class="phase-status done"><i class="ph-bold ph-check-circle" style="font-size:12px;"></i> Deployed</div>
+          <div class="phase-title">LLM-Powered Infinite Challenges</div>
+          <div class="phase-desc">Dynamic challenge generation via Google Gemini API. Unlimited, contextual problems with structured JSON output and automatic fallback to static challenges.</div>
+          <div class="phase-features">
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Google Gemini API integration</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Structured JSON response schema</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> Automatic fallback to static pool</div>
+            <div class="phase-feat done-item"><i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i> LLM response validation layer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-content-left">
+          <div class="phase-status soon"><i class="ph ph-hourglass-medium" style="font-size:12px;"></i> Planned</div>
+          <div class="phase-title">Micro-SaaS & Community</div>
+          <div class="phase-desc">Premium tiers, team challenges, company onboarding tracks, and analytics. The product that trains the next generation of Go engineers.</div>
+          <div class="phase-features">
+            <div class="phase-feat">Premium subscription tiers</div>
+            <div class="phase-feat">Team leaderboards for companies</div>
+            <div class="phase-feat">Custom challenge sets</div>
+            <div class="phase-feat">Analytics dashboard</div>
+          </div>
+        </div>
+        <div class="phase-center">
+          <div class="phase-dot next">v4</div>
+          <div class="phase-ver">Next</div>
+        </div>
+        <div class="phase-content-right"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ TECH STACK ════════════════ -->
+<div id="stack" class="section container">
+  <div class="section-head">
+    <div class="label reveal">07 — Tech Stack</div>
+    <h2 class="reveal delay-1">Production-grade<br><em>from day one.</em></h2>
+  </div>
+
+  <div class="stack-grid">
+    <div class="stack-card reveal">
+      <div class="stack-layer">Language & Runtime</div>
+      <div class="stack-items">
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph-bold ph-code" style="color:var(--cyan);"></i></div><div><div class="stack-item-name">Go 1.25+</div><div class="stack-item-role">Core language · Statically typed, blazing fast</div></div></div>
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-package" style="color:var(--sap-300);"></i></div><div><div class="stack-item-name">godotenv</div><div class="stack-item-role">Environment configuration management</div></div></div>
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-check-square" style="color:var(--green);"></i></div><div><div class="stack-item-name">go-playground/validator</div><div class="stack-item-role">Struct validation & data integrity</div></div></div>
+      </div>
+    </div>
+
+    <div class="stack-card reveal delay-1">
+      <div class="stack-layer">Database & ORM</div>
+      <div class="stack-items">
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-database" style="color:var(--sap-300);"></i></div><div><div class="stack-item-name">Supabase</div><div class="stack-item-role">PostgreSQL hosting · Session Pooler</div></div></div>
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-wrench" style="color:var(--sap-300);"></i></div><div><div class="stack-item-name">GORM</div><div class="stack-item-role">ORM · Auto-migration · Type safety</div></div></div>
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-link" style="color:var(--sap-300);"></i></div><div><div class="stack-item-name">TLS Pooler</div><div class="stack-item-role">Secure database connections</div></div></div>
+      </div>
+    </div>
+
+    <div class="stack-card reveal delay-2">
+      <div class="stack-layer">Infrastructure & APIs</div>
+      <div class="stack-items">
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-rocket-launch" style="color:var(--cyan);"></i></div><div><div class="stack-item-name">Fly.io</div><div class="stack-item-role">Deployment · Native Go buildpack · Global edge</div></div></div>
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-broadcast" style="color:var(--sap-300);"></i></div><div><div class="stack-item-name">Telegram Bot API</div><div class="stack-item-role">Webhook mode · HTML/Markdown formatting</div></div></div>
+        <div class="stack-item"><div class="stack-item-icon"><i class="ph ph-brain" style="color:var(--sap-300);"></i></div><div><div class="stack-item-name">Google Gemini API</div><div class="stack-item-role">LLM-powered dynamic challenge generation</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ OPEN SOURCE ════════════════ -->
+<div id="opensource" class="section container">
+  <div class="section-head">
+    <div class="label reveal">08 — Open Source</div>
+    <h2 class="reveal delay-1">Built in the open.<br><em>Join the craft.</em></h2>
+  </div>
+
+  <div class="features-grid">
+    <!-- Contribution Rules -->
+    <div class="feature-card span-2 reveal">
+      <div class="feature-icon"><i class="ph ph-scroll"></i></div>
+      <div class="feature-title">Contribution Rules</div>
+      <div class="feature-desc">Follow these guidelines to keep the codebase clean and PRs smooth.</div>
+      <div class="cmd-list">
+        <div class="cmd-item"><span class="cmd-name">Fork & Branch</span><span class="cmd-desc">Fork the repo, create a feature branch — never push directly to main</span></div>
+        <div class="cmd-item"><span class="cmd-name">Small PRs</span><span class="cmd-desc">Keep pull requests focused — one feature or fix per PR</span></div>
+        <div class="cmd-item"><span class="cmd-name">Go Conventions</span><span class="cmd-desc">Follow standard Go formatting (gofmt), naming, and error handling</span></div>
+        <div class="cmd-item"><span class="cmd-name">Test Your Changes</span><span class="cmd-desc">Run go build ./... before submitting — broken builds won't be merged</span></div>
+        <div class="cmd-item"><span class="cmd-name">Describe Your PR</span><span class="cmd-desc">Write a clear PR title and description explaining what and why</span></div>
+        <div class="cmd-item"><span class="cmd-name">Be Respectful</span><span class="cmd-desc">Constructive feedback only — we're all here to learn</span></div>
+      </div>
+    </div>
+
+    <!-- Getting Started -->
+    <div class="feature-card reveal delay-1">
+      <div class="feature-icon"><i class="ph ph-rocket-launch"></i></div>
+      <div class="feature-title">Getting Started</div>
+      <div class="feature-desc">Five steps from fork to pull request.</div>
+      <div class="cmd-list">
+        <div class="cmd-item"><span class="cmd-name" style="width:28px;">01</span><span class="cmd-desc">Fork the repository on GitHub</span></div>
+        <div class="cmd-item"><span class="cmd-name" style="width:28px;">02</span><span class="cmd-desc">Clone and set up your .env from .env.example</span></div>
+        <div class="cmd-item"><span class="cmd-name" style="width:28px;">03</span><span class="cmd-desc">Run go run . to start locally</span></div>
+        <div class="cmd-item"><span class="cmd-name" style="width:28px;">04</span><span class="cmd-desc">Make your changes and test</span></div>
+        <div class="cmd-item"><span class="cmd-name" style="width:28px;">05</span><span class="cmd-desc">Open a pull request</span></div>
+      </div>
+    </div>
+
+    <!-- What We Need -->
+    <div class="feature-card reveal delay-2">
+      <div class="feature-icon"><i class="ph ph-hand-heart"></i></div>
+      <div class="feature-title">What We Need</div>
+      <div class="feature-desc">Areas where contributions make the biggest impact.</div>
+      <div class="diff-list" style="flex-direction:column;gap:10px;margin-top:16px;">
+        <div style="display:flex;align-items:center;gap:10px;"><div class="diff-tag easy"><i class="ph-fill ph-circle" style="font-size:8px;"></i> Easy</div><span style="font-family:var(--font-m);font-size:13px;color:var(--muted);">New challenge ideas</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><div class="diff-tag med"><i class="ph-fill ph-circle" style="font-size:8px;"></i> Medium</div><span style="font-family:var(--font-m);font-size:13px;color:var(--muted);">Bug fixes & testing</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><div class="diff-tag hard"><i class="ph-fill ph-circle" style="font-size:8px;"></i> Hard</div><span style="font-family:var(--font-m);font-size:13px;color:var(--muted);">Multi-language support</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><div class="diff-tag easy"><i class="ph-fill ph-circle" style="font-size:8px;"></i> Easy</div><span style="font-family:var(--font-m);font-size:13px;color:var(--muted);">Documentation improvements</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-line"></div>
+
+<!-- ════════════════ CTA ════════════════ -->
+<div class="cta-section reveal">
+  <div class="cta-bg"></div>
+  <div class="label" style="justify-content:center;">Ready to train?</div>
+  <h2>Stop reading.<br><em>Start coding.</em></h2>
+  <p>Join the dojo. Your first challenge is waiting. Daily practice compounds — one kata at a time.</p>
+  <div class="cta-actions">
+    <a href="https://t.me/CodeChallengerBot" class="tg-link">
+      <i class="ph-bold ph-telegram-logo" style="font-size:20px;"></i>
+      Open @CodeChallengerBot
+    </a>
+    <a href="https://github.com/jixkls/code-challenging-bot" class="btn btn-ghost btn-lg">View on GitHub <i class="ph ph-arrow-right" style="font-size:14px;"></i></a>
+  </div>
+  <div style="margin-top:32px;font-family:var(--font-m);font-size:11px;color:var(--dimmed);">
+    Free · No signup · Just Telegram · Built with Go
+  </div>
+</div>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="margin-bottom:14px;display:inline-flex;">
+          <div class="logo-mark"><i class="ph-bold ph-sword"></i></div>
+          <div>
+            <div class="logo-text">Code<span>Challenger</span></div>
+            <div class="logo-sub">@CodeChallengerBot</div>
+          </div>
+        </a>
+        <p>A Telegram bot for daily coding practice with game-like progression. Built to master Go web development — evolved into a platform for all developers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Bot</h4>
+        <ul>
+          <li><a href="#">Open in Telegram</a></li>
+          <li><a href="#">Commands Reference</a></li>
+          <li><a href="#">Progression Guide</a></li>
+          <li><a href="#">Difficulty Levels</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Roadmap</h4>
+        <ul>
+          <li><a href="#roadmap">v1 · Done</a></li>
+          <li><a href="#roadmap">v2 · Done</a></li>
+          <li><a href="#roadmap">v3 · Done</a></li>
+          <li><a href="#roadmap">v4 · Planned</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Stack</h4>
+        <ul>
+          <li><a href="#">Go 1.25+</a></li>
+          <li><a href="#">Supabase + GORM</a></li>
+          <li><a href="#">Fly.io</a></li>
+          <li><a href="#">Google Gemini API</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Open Source</h4>
+        <ul>
+          <li><a href="https://github.com/jixkls/code-challenging-bot">GitHub Repo</a></li>
+          <li><a href="#opensource">Contribution Rules</a></li>
+          <li><a href="https://github.com/jixkls/code-challenging-bot/issues">Report Issues</a></li>
+          <li><a href="https://github.com/jixkls/code-challenging-bot/pulls">Pull Requests</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2026 Code Challenger Bot · Built by Bettin · Powered by Go & Fly.io
+      </div>
+      <div class="footer-tags">
+        <span class="ftag">Go</span>
+        <span class="ftag">Telegram</span>
+        <span class="ftag">Supabase</span>
+        <span class="ftag">Fly.io</span>
+      </div>
+      <div class="footer-version">
+        Version <span>v0.6.1</span> · Deployed <i class="ph-bold ph-check" style="font-size:12px;color:var(--green);"></i>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/script.js"></script>
+</body>
+</html>

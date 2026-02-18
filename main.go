@@ -37,7 +37,7 @@ func main() {
 		log.Println("Warning: GEMINI_API_KEY not set. Using static challenges only.")
 	}
 
-	http.HandleFunc("/", healthHandler)
+	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/webhook", handlers.WebhookHandler)
 
 	port := os.Getenv("PORT")
